@@ -1,3 +1,7 @@
 spring:
-  application:
-    server: 8080
+    application:
+        server: 8080
+        name: skillMatrix
+    security:
+        basic:
+            enabled: false
