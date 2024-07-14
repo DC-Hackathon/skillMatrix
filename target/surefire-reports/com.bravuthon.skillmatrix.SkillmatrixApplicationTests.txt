@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.bravuthon.skillmatrix.SkillmatrixApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 2.950 s -- in com.bravuthon.skillmatrix.SkillmatrixApplicationTests
