@@ -11,14 +11,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name= "skill_master")
-public class SkillMasterEntity extends BaseEntity {
+@Table(name = "ProductMaster")
+public class ProductMasterEntity extends BaseEntity {
 
-    @Column(name = "skill", nullable = false)
-    private String skill;
+    private String productName;
+
+    private String provider;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cat_id", nullable = false)
-    private CategoryMasterEntity categoryMasterEntity;
+    @JoinColumn(name = "prod_id", nullable = false)
+    private FunctionMasterEntity functionMasterEntity;
+
 
 }

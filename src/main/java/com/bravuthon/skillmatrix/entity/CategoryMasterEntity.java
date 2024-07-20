@@ -12,6 +12,7 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name= "category_table")
 public class CategoryMasterEntity extends BaseEntity {
 
