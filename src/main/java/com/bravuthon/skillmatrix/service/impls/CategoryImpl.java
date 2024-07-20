@@ -18,6 +18,8 @@ public class CategoryImpl implements CategoryInf {
     private final CategoryRepo categoryRepo;
     private final CategoryMapper categoryMapper;
 
+    // this is only for learning purpose
+    //todo: create custom errorhandler.
     Supplier<NoDataFoundException> supplier = () -> new NoDataFoundException("No data found in the DB.");
 
     public CategoryImpl(CategoryRepo categoryRepo, CategoryMapper categoryMapper) {
