@@ -1,5 +1,5 @@
 server:
-    port: ${PORT:8181}
+    port: ${PORT:8080}
     cors:
         enabled: true
     servlet:
@@ -10,7 +10,7 @@ spring:
         name: skillMatrix
     jpa:
         hibernate:
-            ddl-auto: create # When you launch the application for the first time - switch "none" at "create"
+            ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
         show-sql: true
         database: postgresql
         generate-ddl: true
@@ -20,5 +20,8 @@ spring:
         username: postgres
         password: password
         driverClassName: org.postgresql.Driver
+
+swagger:
+    path: http://localhost:8080/skillMatrix/v3/api-docs
 
 
