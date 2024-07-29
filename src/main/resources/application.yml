@@ -1,5 +1,5 @@
 server:
-    port: ${PORT:8080}
+    port: ${PORT:8181}
     cors:
         enabled: true
     servlet:
@@ -22,6 +22,6 @@ spring:
         driverClassName: org.postgresql.Driver
 
 swagger:
-    path: http://localhost:8080/skillMatrix/v3/api-docs
+    path: http://localhost:8181/skillMatrix/v3/api-docs
 
 

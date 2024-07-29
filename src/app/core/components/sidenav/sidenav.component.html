@@ -1,0 +1,11 @@
+<mat-nav-list>
+    <a mat-list-item *ngFor="let item of menuItems()" 
+        [routerLink]="item.route" 
+        routerLinkActive
+        #rda="routerLinkActive"
+        [activated]="rda.isActive"
+    >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle *ngIf="!sidenavCollapsed()">{{ item.label }}</span>
+    </a>
+</mat-nav-list>

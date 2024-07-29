@@ -4,6 +4,8 @@ import com.bravuthon.skillmatrix.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -14,16 +16,17 @@ import lombok.*;
 @Table(name= "user_skills")
 public class UserSkillEntity extends BaseEntity {
 
-    private String name;
-    private String categoryId;
-    private String skillId;
-    private String productId;
+    private UUID categoryId;
+    private UUID skillId;
+    private UUID productId;
     private String proficiencyLevel;
     private boolean certificateDone;
     private String upload;
     private boolean upSkill;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "userId")
     private UserEntity userId;
+
 }

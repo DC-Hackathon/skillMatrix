@@ -1,0 +1,7 @@
+mat-toolbar {
+	background: var(--theme-primary-500) !important;
+	height: 64px;
+	position: relative;
+	z-index: 5;
+	color: var(--smokeyWhite);
+}

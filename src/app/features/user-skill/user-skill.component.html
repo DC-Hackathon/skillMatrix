@@ -1,0 +1,128 @@
+<h1>Add skills!</h1>
+<div class="add-skill-container">
+  <div class="container">
+    <form [formGroup]="skillForm">
+        <mat-form-field>
+            <mat-label>Select User</mat-label>
+            <mat-select formControlName="userName">
+            <mat-option *ngFor="let item of userMaster" [value]="item.id">
+                {{ item.name }}
+            </mat-option>
+            </mat-select>
+            <mat-error *ngIf="skillForm.get('category')?.invalid && (skillForm.get('category')?.dirty || skillForm.get('category')?.touched)">
+            Category is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Skill Category</mat-label>
+            <mat-select (selectionChange)="onItemSelected($event)" formControlName="category">
+              <mat-option *ngFor="let item of categoryMaster" [value]="item.id">
+                {{ item.categoryName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="skillForm.get('category')?.invalid && (skillForm.get('category')?.dirty || skillForm.get('category')?.touched)">
+              Category is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Skill</mat-label>
+            <mat-select formControlName="skill">
+              <mat-option *ngFor="let item of skillSet" [value]="item.id">
+                {{ item.skill }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="skillForm.get('category')?.invalid && (skillForm.get('category')?.dirty || skillForm.get('category')?.touched)">
+              Skill is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select Product</mat-label>
+            <mat-select formControlName="product">
+              <mat-option *ngFor="let item of productMasterDtos" [value]="item.id">
+                {{ item.productName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="skillForm.get('category')?.invalid && (skillForm.get('category')?.dirty || skillForm.get('category')?.touched)">
+              Product is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field hintLabel="Max 50 characters">
+            <mat-label>Enter Profeciancy Level</mat-label>
+            <input matInput formControlName="profeciancyName" maxlength="50" placeholder="Ex. Nougat" />
+            <mat-hint align="end">{{ skillForm.get('profeciancyName')?.value?.length || 0 }}/50</mat-hint>
+            <mat-error *ngIf="skillForm.get('profeciancyName')?.invalid && (skillForm.get('profeciancyName')?.dirty || skillForm.get('profeciancyName')?.touched)">
+                Profeciancy is required.
+            </mat-error>
+        </mat-form-field>
+          
+        <mat-slide-toggle
+            formControlName="certificate"
+            class="example-margin"
+            [checked]="checked">
+            Have Certificate!
+        </mat-slide-toggle>
+
+        <mat-slide-toggle
+            formControlName="upSkill"
+            class="example-margin"
+            [checked]="checked">
+            Up Skill!
+        </mat-slide-toggle>
+      <!-- </mat-form-field>
+      <mat-form-field hintLabel="Max 50 characters">
+        <mat-label>Have Certificate</mat-label>
+        <input matInput formControlName="skillName" maxlength="50" placeholder="Ex. Nougat" />
+        <mat-hint align="end">{{ skillForm.get('skillName')?.value?.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="skillForm.get('skillName')?.invalid && (skillForm.get('skillName')?.dirty || skillForm.get('skillName')?.touched)">
+          Skill name is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field hintLabel="Max 50 characters">
+        <mat-label>Wanna Up Skill!</mat-label>
+        <input matInput formControlName="skillName" maxlength="50" placeholder="Ex. Nougat" />
+        <mat-hint align="end">{{ skillForm.get('skillName')?.value?.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="skillForm.get('skillName')?.invalid && (skillForm.get('skillName')?.dirty || skillForm.get('skillName')?.touched)">
+          Skill name is required.
+        </mat-error>
+      </mat-form-field> -->
+      <div class="foot-container">
+        <button class="container ff" (click)="onSubmit()" mat-button [disabled]="skillForm.invalid" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <mat-divider></mat-divider>
+<mat-form-field>
+  <mat-icon matListItemIcon class="filter-icon">filter_alt</mat-icon>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Category/Skill" #input>
+</mat-form-field>
+<mat-divider></mat-divider>
+<div class="example-table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+     Position Column -->
+    <!-- <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef> Category Name. </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+    </ng-container> -->
+  
+    <!-- Name Column -->
+    <!-- <ng-container matColumnDef="skillMasterSet">
+      <th mat-header-cell *matHeaderCellDef> Skill Name. </th>
+      <td mat-cell *matCellDef="let element"> 
+        
+        <a *ngFor="let skill of element.skillMasterSet">
+          <span>- </span>
+          <span>{{ skill.skill }}</span>
+          <br>
+        </a>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </table>
+</div> -->

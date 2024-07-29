@@ -4,6 +4,7 @@ import com.bravuthon.skillmatrix.entity.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,5 +22,5 @@ public class FunctionMasterEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "functionMasterEntity", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private Set<ProductMasterEntity> productMasterEntity;
+    private List<ProductMasterEntity> productMasterEntity;
 }

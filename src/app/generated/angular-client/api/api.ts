@@ -1,0 +1,13 @@
+export * from './categoryController.service';
+import { CategoryControllerService } from './categoryController.service';
+export * from './functionController.service';
+import { FunctionControllerService } from './functionController.service';
+export * from './productController.service';
+import { ProductControllerService } from './productController.service';
+export * from './skillController.service';
+import { SkillControllerService } from './skillController.service';
+export * from './userController.service';
+import { UserControllerService } from './userController.service';
+export * from './userSkillMappingController.service';
+import { UserSkillMappingControllerService } from './userSkillMappingController.service';
+export const APIS = [CategoryControllerService, FunctionControllerService, ProductControllerService, SkillControllerService, UserControllerService, UserSkillMappingControllerService];

@@ -13,4 +13,5 @@ public interface CategoryMapper {
 
     @Mapping(source = "skillMasterEntitySet", target = "skillMasterSet")
     CategoryMasterDto categoryEntityToCategoryDto(CategoryMasterEntity categoryMasterEntity);
+
 }

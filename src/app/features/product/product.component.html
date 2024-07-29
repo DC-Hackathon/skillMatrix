@@ -1,0 +1,83 @@
+<h1>Add Product!</h1>
+<div class="add-skill-container">
+  <div class="container">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Select Function</mat-label>
+        <mat-select formControlName="functionName">
+          <mat-option *ngFor="let item of ELEMENT_DATA" [value]="item.id">
+            {{ item.functionName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('functionName')?.invalid && (productForm.get('functionName')?.dirty || productForm.get('functionName')?.touched)">
+          Function is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field hintLabel="Max 50 characters">
+        <mat-label>Enter Related Product</mat-label>
+        <input matInput formControlName="productName" maxlength="50" placeholder="Ex. Nougat" />
+        <mat-hint align="end">{{ productForm.get('productName')?.value?.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="productForm.get('productName')?.invalid && (productForm.get('productName')?.dirty || productForm.get('productName')?.touched)">
+            Product name is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field hintLabel="Max 50 characters">
+        <mat-label>Enter Related Provider</mat-label>
+        <input matInput formControlName="providerName" maxlength="50" placeholder="Ex. Nougat" />
+        <mat-hint align="end">{{ productForm.get('providerName')?.value?.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="productForm.get('providerName')?.invalid && (productForm.get('providerName')?.dirty || productForm.get('providerName')?.touched)">
+            Provider name is required.
+        </mat-error>
+      </mat-form-field>
+      <div class="foot-container">
+        <button class="container ff" mat-button [disabled]="productForm.invalid" type="submit">Add Skill</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+<mat-form-field>
+  <mat-icon matListItemIcon class="filter-icon">filter_alt</mat-icon>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Category/Skill" #input>
+</mat-form-field>
+<mat-divider></mat-divider>
+<div class="example-table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="functionName">
+      <th mat-header-cell *matHeaderCellDef> Function </th>
+      <td mat-cell *matCellDef="let element"> {{element.functionName}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="productMasterDtos">
+      <th mat-header-cell *matHeaderCellDef> Product </th>
+      <td mat-cell *matCellDef="let element"> 
+        
+        <a *ngFor="let skill of element.productMasterDtos">
+          <span>- </span>
+          <span>{{ skill.productName }}</span>
+          <br>
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="provider">
+      <th mat-header-cell *matHeaderCellDef> Provider </th>
+      <td mat-cell *matCellDef="let element"> 
+        
+        <a *ngFor="let skill of element.productMasterDtos">
+          <span>- </span>
+          <span>{{ skill.provider }}</span>
+          <br>
+        </a>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </table>
+</div>

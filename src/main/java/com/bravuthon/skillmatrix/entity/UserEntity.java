@@ -1,13 +1,8 @@
 package com.bravuthon.skillmatrix.entity;
 
 import com.bravuthon.skillmatrix.entity.base.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Entity
 @Getter
@@ -27,8 +22,8 @@ public class UserEntity extends BaseEntity {
     private String experience;
     private String location;
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private Set<UserSkillEntity> userSkillEntities;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "userId")
+    @PrimaryKeyJoinColumn
+    private UserSkillEntity userSkillEntities;
 
 }
