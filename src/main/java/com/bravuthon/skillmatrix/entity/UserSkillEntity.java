@@ -16,17 +16,16 @@ import java.util.UUID;
 @Table(name= "user_skills")
 public class UserSkillEntity extends BaseEntity {
 
-    private UUID categoryId;
-    private UUID skillId;
-    private UUID productId;
+    private String categoryId;
+    private String skillId;
+    private String productId;
     private String proficiencyLevel;
     private boolean certificateDone;
     private String upload;
     private boolean upSkill;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "userId")
-    private UserEntity userId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
 
 }

@@ -2,8 +2,8 @@ package com.bravuthon.skillmatrix.model;
 
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.UUID;
+
 
 @Setter
 @Getter
@@ -11,9 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @ToString
-public class UserSkillDto implements Serializable {
+public class UserSkillRequest {
 
-    private UUID id;
+    private UUID userId;
     private String categoryId;
     private String skillId;
     private String productId;
@@ -21,5 +21,4 @@ public class UserSkillDto implements Serializable {
     private boolean certificateDone;
     private String upload;
     private boolean upSkill;
-    private UUID userId;
 }

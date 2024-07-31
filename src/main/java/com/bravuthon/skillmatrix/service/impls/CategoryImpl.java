@@ -1,10 +1,11 @@
 package com.bravuthon.skillmatrix.service.impls;
 
 import com.bravuthon.skillmatrix.exception.NoDataFoundException;
-import com.bravuthon.skillmatrix.mapper.CategoryMapper;
+import com.bravuthon.skillmatrix.mapper.ProductMapper;
 import com.bravuthon.skillmatrix.model.CategoryMasterDto;
 import com.bravuthon.skillmatrix.repository.CategoryRepo;
 import com.bravuthon.skillmatrix.service.CategoryInf;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -16,13 +17,14 @@ import java.util.stream.Collectors;
 public class CategoryImpl implements CategoryInf {
 
     private final CategoryRepo categoryRepo;
-    private final CategoryMapper categoryMapper;
+    private final ProductMapper categoryMapper;
 
     // this is only for learning purpose
     //todo: create custom errorhandler.
     Supplier<NoDataFoundException> supplier = () -> new NoDataFoundException("No data found in the DB.");
 
-    public CategoryImpl(CategoryRepo categoryRepo, CategoryMapper categoryMapper) {
+    @Autowired
+    public CategoryImpl(CategoryRepo categoryRepo, ProductMapper categoryMapper) {
         this.categoryRepo = categoryRepo;
         this.categoryMapper = categoryMapper;
     }

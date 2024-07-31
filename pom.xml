@@ -173,7 +173,7 @@
                 <configuration>
                     <skip>${skip.angular}</skip>
                     <apiDocsUrl>http://localhost:8181/skillMatrix/v3/api-docs</apiDocsUrl>
-                    <outputFileName>/classes/${api.fileName}.yaml</outputFileName>
+                    <outputFileName>api-docs.yaml</outputFileName> <!-- Just file name -->
                     <outputDir>${project.build.directory}</outputDir>
                 </configuration>
             </plugin>
@@ -190,7 +190,7 @@
                         </goals>
                         <configuration>
                             <skip>${skip.angular}</skip>
-                            <inputSpec>http://localhost:8181/skillMatrix/v3/api-docs</inputSpec>
+                            <inputSpec>${project.build.directory}/api-docs.yaml</inputSpec>
                             <output>/${project.basedir}/src/app/generated/angular-client</output>
                             <generatorName>typescript-angular</generatorName>
                             <configOptions>
@@ -247,7 +247,7 @@
 <!--                    </execution>-->
                 </executions>
                 <configuration>
-                    <nodeVersion>v20.9.0</nodeVersion>
+                    <nodeVersion>v20.15.1</nodeVersion>
                     <installDirectory>target</installDirectory>
                     <workingDirectory>src/app</workingDirectory>
                 </configuration>

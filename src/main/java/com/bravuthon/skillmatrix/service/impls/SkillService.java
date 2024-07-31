@@ -2,9 +2,8 @@ package com.bravuthon.skillmatrix.service.impls;
 
 import com.bravuthon.skillmatrix.entity.CategoryMasterEntity;
 import com.bravuthon.skillmatrix.entity.SkillMasterEntity;
-import com.bravuthon.skillmatrix.mapper.CategoryMapper;
+import com.bravuthon.skillmatrix.mapper.ProductMapper;
 import com.bravuthon.skillmatrix.model.AddSkillRequest;
-import com.bravuthon.skillmatrix.model.CategoryMasterDto;
 import com.bravuthon.skillmatrix.model.SkillResponse;
 import com.bravuthon.skillmatrix.repository.CategoryRepo;
 import com.bravuthon.skillmatrix.repository.SkillRepo;
@@ -21,13 +20,10 @@ public class SkillService implements SkillInf {
     private final SkillRepo skillRepo;
     private final CategoryRepo categoryRepo;
 
-    private final CategoryMapper categoryMapper;
-
     @Autowired
-    public SkillService(SkillRepo skillRepo, CategoryRepo categoryRepo, CategoryMapper categoryMapper) {
+    public SkillService(SkillRepo skillRepo, CategoryRepo categoryRepo) {
         this.skillRepo = skillRepo;
         this.categoryRepo = categoryRepo;
-        this.categoryMapper = categoryMapper;
     }
 
     @Override

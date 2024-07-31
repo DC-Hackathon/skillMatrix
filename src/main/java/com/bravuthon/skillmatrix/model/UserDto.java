@@ -3,6 +3,7 @@ package com.bravuthon.skillmatrix.model;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Setter
@@ -21,6 +22,6 @@ public class UserDto implements Serializable {
     private String managerName;
     private String experience;
     private String location;
-    private UserSkillDto userSkillDto;
+    private List<UserSkillDto> userSkillDto;
 
 }

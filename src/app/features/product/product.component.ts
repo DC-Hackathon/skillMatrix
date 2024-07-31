@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, takeUntil } from 'rxjs';
 import { FunctionControllerService, FunctionMasterDto, ProductControllerService, ProductMasterDto, ProductRequest } from '../../generated/angular-client';
 
 @Component({
@@ -50,6 +50,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     
     this._functionService
       .getAllFunction()
+      .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (data: Array<FunctionMasterDto>) => {
           this.ELEMENT_DATA = data;

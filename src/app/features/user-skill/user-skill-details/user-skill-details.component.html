@@ -1,0 +1,18 @@
+<div class="add-skill-container example-table-container">
+    <div>
+        <table mat-table
+            [dataSource]="userMasterData" multiTemplateDataRows>
+        @for (column of displayColums; track column) {
+            <ng-container matColumnDef="{{column}}">
+            <th mat-header-cell *matHeaderCellDef class="table-head"> {{ userColumnDisplayNames[column] | uppercase }} </th>
+            <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
+            </ng-container>
+        }
+    
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+            class="example-element-row">
+        </tr>
+        </table>
+    </div>
+</div>

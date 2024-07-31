@@ -2,9 +2,9 @@ package com.bravuthon.skillmatrix.service.impls;
 
 import com.bravuthon.skillmatrix.entity.UserEntity;
 import com.bravuthon.skillmatrix.entity.UserSkillEntity;
-import com.bravuthon.skillmatrix.mapper.UserMapper;
+import com.bravuthon.skillmatrix.mapper.ProductMapper;
 import com.bravuthon.skillmatrix.model.UserDto;
-import com.bravuthon.skillmatrix.model.UserSkillDto;
+import com.bravuthon.skillmatrix.model.UserSkillRequest;
 import com.bravuthon.skillmatrix.repository.UserRepo;
 import com.bravuthon.skillmatrix.repository.UserSkillMasterRepo;
 import com.bravuthon.skillmatrix.service.UserInf;
@@ -20,11 +20,11 @@ import java.util.UUID;
 public class UserSkillImpl implements UserInf, UserSkillInf {
 
     private final UserRepo userRepo;
-    private final UserMapper userMapper;
+    private final ProductMapper userMapper;
     private final UserSkillMasterRepo userSkillMasterRepo;
 
     @Autowired
-    public UserSkillImpl(UserRepo userRepo, UserMapper userMapper, UserSkillMasterRepo userSkillMasterRepo) {
+    public UserSkillImpl(UserRepo userRepo, ProductMapper userMapper, UserSkillMasterRepo userSkillMasterRepo) {
         this.userRepo = userRepo;
         this.userMapper = userMapper;
         this.userSkillMasterRepo = userSkillMasterRepo;
@@ -52,16 +52,16 @@ public class UserSkillImpl implements UserInf, UserSkillInf {
     }
 
     @Override
-    public ResponseEntity<?> saveUserSkill(UserSkillDto userSkillDto) {
-
-
+    public ResponseEntity<?> saveUserSkill(UserSkillRequest userSkillDto) {
+        UserEntity userEntity = userRepo.findById(userSkillDto.getUserId());
         UserSkillEntity userSkill = new UserSkillEntity();
         userSkill.setSkillId(userSkillDto.getSkillId());
         userSkill.setUpSkill(userSkillDto.isUpSkill());
-        userSkill.setUserId(userRepo.findById(userSkillDto.getUserId()).get());
         userSkill.setProductId(userSkillDto.getProductId());
         userSkill.setCategoryId(userSkillDto.getCategoryId());
         userSkill.setCertificateDone(userSkillDto.isUpSkill());
+        userSkill.setProficiencyLevel(userSkillDto.getProficiencyLevel());
+        userSkill.setUserEntity(userEntity);
 
         userSkillMasterRepo.save(userSkill);
         return ResponseEntity.ok(userSkillDto);

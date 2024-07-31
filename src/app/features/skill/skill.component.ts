@@ -2,7 +2,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AddSkillRequest, CategoryControllerService, CategoryMasterDto, SkillControllerService, SkillMasterDto } from '../../generated/angular-client';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, takeUntil } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,7 +48,8 @@ export class SkillComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSource.filterPredicate = this.createFilter();
     
-    this._categoryService.getAllCategory().subscribe({
+    this._categoryService.getAllCategory()
+    .pipe(takeUntil(this.destroyed$)).subscribe({
       next: (data: Set<CategoryMasterDto>) => {
         this.categoryMaster = data;
         this.ELEMENT_DATA = Array.from(this.categoryMaster);

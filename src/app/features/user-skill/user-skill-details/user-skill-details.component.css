@@ -1,0 +1,26 @@
+.add-skill-container {
+    width: 100%;
+    height: 20vh;
+    background: whitesmoke;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    background: whitesmoke;
+}
+
+th {
+    font-size: 13px;
+}
+
+.example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+table-head {
+    position: absolute;
+}

@@ -15,11 +15,13 @@ spring:
         database: postgresql
         generate-ddl: true
     datasource:
-        platform: postgres
-        url: jdbc:postgresql://localhost:5432/skillMatrix
+        url: jdbc:postgresql://localhost:5433/skillMatrix
         username: postgres
-        password: password
+        password: d3kumar
         driverClassName: org.postgresql.Driver
+    sql:
+        init:
+            platform: postgres
 
 swagger:
     path: http://localhost:8181/skillMatrix/v3/api-docs
