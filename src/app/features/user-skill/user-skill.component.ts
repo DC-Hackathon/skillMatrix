@@ -63,10 +63,10 @@ export class UserSkillComponent implements OnInit, OnDestroy {
   productMasterDtos?: Array<ProductMasterDto>;
   checked = false;
   userSkillAdd?: UserSkillRequest;
-  proficincy = Object.entries(Proficency).map(([key, value]) => ({ key, value }));;
-  
+  proficincy = Object.entries(Proficency).map(([key, value]) => ({ key, value }));
+
   constructor(private _categoryService: CategoryControllerService,
-    private _userService: UserControllerService, 
+    private _userService: UserControllerService,
     private _functionService: FunctionControllerService,
     private _userSkillService: UserSkillMappingControllerService,
     private router: Router, private fb: FormBuilder, private skillService: SkillService) {
@@ -97,7 +97,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
           console.log("done");
         }
       })
-    
+
     this._categoryService.getAllCategory().pipe(takeUntil(this.destroyed$)).subscribe({
       next: (data: Set<CategoryMasterDto>) => {
         this.categoryMaster = data;
@@ -126,7 +126,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
         complete: () => {
           console.log("finish");
         }
-    });    
+    });
   }
 
   updateDataSource(categoryDto: CategoryMasterDto[]){
@@ -135,7 +135,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
 
   onItemSelected(event:any) {
     console.log(event.value);
-    
+
     this.ELEMENT_DATA.filter((f) => {
       if(f.categoryName === event.value) {
         this.skillSet = f.skillMasterSet!;
@@ -150,7 +150,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
       skillId: this.skillForm.get('skill')?.value,
       productId: this.skillForm.get('product')?.value,
       proficiencyLevel: this.skillForm.get('profeciancyName')?.value,
-      certificateDone: this.skillForm.get('certificate')?.value,  
+      certificateDone: this.skillForm.get('certificate')?.value,
       upSkill: this.skillForm.get('upSkill')?.value
     };
     this._userSkillService.mapUser(this.userSkillAdd)
@@ -160,7 +160,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
           this.reloadComponent();
         }
       })
-    
+
   }
 
   private reloadComponent(): void {
@@ -171,7 +171,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    
+
     if(this.skillForm.invalid){
       this.skillForm.markAllAsTouched;
       return;
@@ -200,7 +200,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
 
   populateSkillDetailsOnExpand(element: UserDto) {
     console.log("inside");
-    
+
     this.skillService.setUserMasterData(element.userSkillDto!);
   }
 
