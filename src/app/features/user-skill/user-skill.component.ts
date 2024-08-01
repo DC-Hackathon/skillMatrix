@@ -11,19 +11,20 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ReplaySubject, takeUntil } from 'rxjs';
 import { CategoryMasterDto, AddSkillRequest, CategoryControllerService, SkillControllerService, UserControllerService, UserDto, SkillMasterDto, ProductControllerService, ProductMasterDto, FunctionMasterDto, FunctionControllerService, UserSkillDto, UserSkillMappingControllerService, UserSkillRequest } from '../../generated/angular-client';
 import { Router } from '@angular/router';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { UserSkillDetailsComponent } from './user-skill-details/user-skill-details.component';
 import { Proficency } from '../../utils/enum/Proficency';
 import { SkillService } from '../../skill.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-user-skill',
   standalone: true,
   animations: [
-      trigger('detailExpand', [
-      state('collapsed,void', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+    trigger('detailExpand', [
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -42,8 +43,9 @@ export class UserSkillComponent implements OnInit, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   error: string = '';
-  userMaster: Array<UserDto> = new Array<UserDto>();
+  userMaster: UserDto[] = [];
   ELEMENT_DATA: CategoryMasterDto[] = [];
+  USER_DATA: UserDto[] = []
   columnsToDisplay: string[] = ['name', 'designation', 'role', 'location', 'experience', 'managerName'];
   userColumnDisplayNames: { [key: string]: string } = {
     name: 'Name',
@@ -55,7 +57,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
   };
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement?: UserDto | null;
-  dataSource = new MatTableDataSource<CategoryMasterDto>(this.ELEMENT_DATA);
+  userSkillDataSource = new MatTableDataSource<UserDto>(this.userMaster);
   skillForm!: FormGroup;
   addSkillReq!: AddSkillRequest;
   categoryMaster: Set<CategoryMasterDto> = new Set<CategoryMasterDto>();
@@ -70,25 +72,26 @@ export class UserSkillComponent implements OnInit, OnDestroy {
     private _functionService: FunctionControllerService,
     private _userSkillService: UserSkillMappingControllerService,
     private router: Router, private fb: FormBuilder, private skillService: SkillService) {
-      this.skillForm = this.fb.group({
-        userName: ['', Validators.required],
-        category:['', Validators.required],
-        skill: ['', Validators.required],
-        product: ['', Validators.required],
-        profeciancyName: ['', Validators.required],
-        certificate: ['', Validators.required],
-        upSkill: ['', Validators.required]
-      });
+    this.skillForm = this.fb.group({
+      userName: ['', Validators.required],
+      category: ['', Validators.required],
+      skill: ['', Validators.required],
+      product: ['', Validators.required],
+      profeciancyName: ['', Validators.required],
+      certificate: ['', Validators.required],
+      upSkill: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
-    this.dataSource.filterPredicate = this.createFilter();
+
     this._userService
       .getAllUser()
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (data: Array<UserDto>) => {
           this.userMaster = data;
+          this.userSkillDataSource.data = data
         },
         error: (error) => {
           console.log(error);
@@ -102,7 +105,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
       next: (data: Set<CategoryMasterDto>) => {
         this.categoryMaster = data;
         this.ELEMENT_DATA = Array.from(this.categoryMaster);
-        this.updateDataSource(this.ELEMENT_DATA);
+        // this.updateDataSource(this.ELEMENT_DATA);
       },
       error: (error: any) => {
         this.error = error;
@@ -114,8 +117,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyed$))
       .subscribe({
         next: (data: Array<FunctionMasterDto>) => {
-          console.log(data);
-          if(data !== null){
+          if (data !== null) {
             data.forEach(f => {
               this.productMasterDtos = f.productMasterDtos;
             })
@@ -126,18 +128,14 @@ export class UserSkillComponent implements OnInit, OnDestroy {
         complete: () => {
           console.log("finish");
         }
-    });
+      });
   }
 
-  updateDataSource(categoryDto: CategoryMasterDto[]){
-    return this.dataSource.data = this.ELEMENT_DATA;
-  }
-
-  onItemSelected(event:any) {
+  onItemSelected(event: any) {
     console.log(event.value);
 
     this.ELEMENT_DATA.filter((f) => {
-      if(f.categoryName === event.value) {
+      if (f.categoryName === event.value) {
         this.skillSet = f.skillMasterSet!;
       }
     });
@@ -172,7 +170,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
-    if(this.skillForm.invalid){
+    if (this.skillForm.invalid) {
       this.skillForm.markAllAsTouched;
       return;
     }
@@ -186,20 +184,26 @@ export class UserSkillComponent implements OnInit, OnDestroy {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.userSkillDataSource = new MatTableDataSource<UserDto>(this.userMaster);
+    this.userSkillDataSource.filter = filterValue.trim().toLowerCase();
+    if (filterValue !== '' && this.userSkillDataSource.filteredData.length === 0) {
+      let data = this.userMaster.filter(user => user.userSkillDto?.some(some => {
+        return this.getFilters(some,filterValue)
+      }
+      ));
+      this.userSkillDataSource = new MatTableDataSource<UserDto>(data);
+    }
+  }
+  getFilters(some: UserSkillDto, filterValue:string): boolean {
+    return (some.skillId?.trim().toLowerCase() === filterValue.trim().toLowerCase() 
+    || some.proficiencyLevel?.trim().toLowerCase() === filterValue.trim().toLowerCase()
+    || some.productId?.trim().toLowerCase() === filterValue.trim().toLowerCase()
+    || some.categoryId?.trim().toLowerCase() === filterValue.trim().toLowerCase()
+    );
   }
 
-  createFilter(): (data: CategoryMasterDto, filter: string) => boolean {
-    return (data: CategoryMasterDto, filter: string): boolean => {
-      const transformedFilter = filter.trim().toLowerCase();
-      const matchCategoryName = data.categoryName?.toLowerCase().includes(transformedFilter) || false;
-      const matchSkillName = data.skillMasterSet ? Array.from(data.skillMasterSet).some(skill => skill.skill?.toLowerCase().includes(transformedFilter) || false) : false;
-      return matchCategoryName || matchSkillName;
-    };
-  }
 
   populateSkillDetailsOnExpand(element: UserDto) {
-    console.log("inside");
 
     this.skillService.setUserMasterData(element.userSkillDto!);
   }

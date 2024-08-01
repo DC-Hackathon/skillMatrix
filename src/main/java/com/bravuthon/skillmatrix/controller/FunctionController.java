@@ -5,9 +5,7 @@ import com.bravuthon.skillmatrix.service.FunctionInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,5 +29,10 @@ public class FunctionController {
     @GetMapping(value = "/getFunction", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FunctionMasterDto> getFunction(UUID fId) {
         return functionInf.getFunctionById(fId);
+    }
+
+    @PostMapping(value = "/addFunctions", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addFunctions(@RequestBody List<String> functions) {
+        return functionInf.createFunction(functions);
     }
 }

@@ -34,4 +34,9 @@ public class SkillController {
             return skillService.addSkill(addSkillRequest);
     }
 
+    @GetMapping(value = "/getuserSkill", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUserSkill(){
+        return ResponseEntity.ok("");
+    }
+
 }
