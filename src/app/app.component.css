@@ -12,13 +12,14 @@ mat-sidenav-container {
     height: calc(100vh - 64px);
 }
 
-.toolbar-content {
+/* .toolbar-content {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     width: 100%;
     position: relative;
-}
+} */
 
 button[mat-icon-button] {
     position: absolute;
@@ -28,7 +29,15 @@ button[mat-icon-button] {
 }
 
 .toolbar-image {
-    margin: 0rem auto;
+    position: relative;
+    margin: 0rem 4vh;
+    width: 140px;
+    height: auto;
+}
+
+.skill-txt {
+    position: relative;
+    margin: 0rem 15rem;
     width: 140px;
     height: auto;
 }
