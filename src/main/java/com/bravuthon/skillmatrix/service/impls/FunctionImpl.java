@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,5 +43,17 @@ public class FunctionImpl implements FunctionInf {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(functionList);
+    }
+
+    @Override
+    public ResponseEntity<?> createFunction(List<String> functions) {
+        functions.forEach(f -> {
+            FunctionMasterEntity functionMasterEntity = new FunctionMasterEntity();
+            functionMasterEntity.setFunctionName(f);
+            functionMasterEntity.setCreatedAt(new Date());
+            functionMasterEntity.setCreatedBy("d3kumar");
+            functionRepo.save(functionMasterEntity);
+        });
+        return ResponseEntity.ok("function saved in db");
     }
 }

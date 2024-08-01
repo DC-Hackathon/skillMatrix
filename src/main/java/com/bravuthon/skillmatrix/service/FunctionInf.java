@@ -10,4 +10,6 @@ public interface FunctionInf {
     ResponseEntity<FunctionMasterDto> getFunctionById(UUID fId);
 
     ResponseEntity<List<FunctionMasterDto>> getAllFunctions();
+
+    ResponseEntity<?> createFunction(List<String> functions);
 }

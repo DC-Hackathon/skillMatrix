@@ -83,14 +83,15 @@
 </div>
 
 <mat-divider></mat-divider>
-  <mat-form-field>
-    <mat-icon matListItemIcon class="filter-icon">filter_alt</mat-icon>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Category/Skill" #input>
-  </mat-form-field>
+<mat-form-field>
+  <mat-icon matListItemIcon class="filter-icon">filter_alt</mat-icon>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Filter User Data" #input>
+</mat-form-field>
 <mat-divider></mat-divider>
+
 <table mat-table
-       [dataSource]="userMaster" multiTemplateDataRows
+       [dataSource]="userSkillDataSource" multiTemplateDataRows
        class="mat-elevation-z8">
   @for (column of columnsToDisplay; track column) {
     <ng-container matColumnDef="{{column}}">
