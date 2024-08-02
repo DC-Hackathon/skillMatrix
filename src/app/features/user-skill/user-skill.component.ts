@@ -62,7 +62,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
   addSkillReq!: AddSkillRequest;
   categoryMaster: Set<CategoryMasterDto> = new Set<CategoryMasterDto>();
   skillSet?: Set<SkillMasterDto>;
-  productMasterDtos?: Array<ProductMasterDto>;
+  productMasterDtos?: Array<ProductMasterDto> =[];
   checked = false;
   userSkillAdd?: UserSkillRequest;
   proficincy = Object.entries(Proficency).map(([key, value]) => ({ key, value }));
@@ -120,11 +120,11 @@ export class UserSkillComponent implements OnInit, OnDestroy {
           if (data !== null) {
             data.forEach(f => {
               if(f.productMasterDtos?.length){
-                this.productMasterDtos = f.productMasterDtos;
+                f.productMasterDtos.forEach(p=> {
+                  this.productMasterDtos?.push(p)
+                })
               }
             })
-            // console.log(this.productMasterDtos);
-            
           }
         }, error: (error) => {
           console.log(error);
