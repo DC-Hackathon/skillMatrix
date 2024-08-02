@@ -59,7 +59,7 @@ public class UserSkillImpl implements UserInf, UserSkillInf {
         userSkill.setUpSkill(userSkillDto.isUpSkill());
         userSkill.setProductId(userSkillDto.getProductId());
         userSkill.setCategoryId(userSkillDto.getCategoryId());
-        userSkill.setCertificateDone(userSkillDto.isUpSkill());
+        userSkill.setCertificateDone(userSkillDto.isCertificateDone());
         userSkill.setProficiencyLevel(userSkillDto.getProficiencyLevel());
         userSkill.setUserEntity(userEntity);
 
