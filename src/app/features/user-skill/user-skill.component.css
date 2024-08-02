@@ -20,9 +20,6 @@
 .foot-container > button {
     background: blue;
     color: aliceblue;
-    width: 15vh;
-    position: relative;
-    top: 2vh;
 }
 
 .ff{

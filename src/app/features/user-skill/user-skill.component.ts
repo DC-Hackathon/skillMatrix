@@ -78,8 +78,8 @@ export class UserSkillComponent implements OnInit, OnDestroy {
       skill: ['', Validators.required],
       product: ['', Validators.required],
       profeciancyName: ['', Validators.required],
-      certificate: ['', Validators.required],
-      upSkill: ['', Validators.required]
+      certificate: [false ],
+      upSkill: [false]
     });
   }
 
@@ -154,7 +154,7 @@ export class UserSkillComponent implements OnInit, OnDestroy {
       proficiencyLevel: this.skillForm.get('profeciancyName')?.value,
       certificateDone: this.skillForm.get('certificate')?.value,
       upSkill: this.skillForm.get('upSkill')?.value
-    };
+    };  
     this._userSkillService.mapUser(this.userSkillAdd)
       .subscribe({
         next: () => {

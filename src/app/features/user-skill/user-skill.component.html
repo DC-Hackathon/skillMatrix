@@ -75,8 +75,9 @@
             [checked]="checked">
             Up Skill!
         </mat-slide-toggle>
-      <div class="foot-container">
-        <button class="container ff" (click)="onSubmit()" mat-button [disabled]="skillForm.invalid" type="submit">Save</button>
+      <div [ngClass] = "skillForm.invalid ? '' : 'foot-container' ">
+        <button mat-stroked-button class="container ff" (click)="onSubmit()" 
+        [disabled]="skillForm.invalid" type="submit">Save</button>
       </div>
     </form>
   </div>
