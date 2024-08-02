@@ -119,8 +119,12 @@ export class UserSkillComponent implements OnInit, OnDestroy {
         next: (data: Array<FunctionMasterDto>) => {
           if (data !== null) {
             data.forEach(f => {
-              this.productMasterDtos = f.productMasterDtos;
+              if(f.productMasterDtos?.length){
+                this.productMasterDtos = f.productMasterDtos;
+              }
             })
+            // console.log(this.productMasterDtos);
+            
           }
         }, error: (error) => {
           console.log(error);
