@@ -1,7 +1,8 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductComponent } from './features/product/product.component';
 import { SkillComponent } from './features/skill/skill.component';
 import { UserSkillComponent } from './features/user-skill/user-skill.component';
-import { ProductComponent } from './features/product/product.component';
 
 export const routes: Routes = [
     {
@@ -22,3 +23,9 @@ export const routes: Routes = [
         component: ProductComponent,
     }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
