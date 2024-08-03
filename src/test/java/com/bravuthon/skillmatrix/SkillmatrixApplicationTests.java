@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SkillmatrixApplicationTests {
 
 	@Test
-	@Disabled
+//	@Disabled
 	void contextLoads() {
 	}
 
