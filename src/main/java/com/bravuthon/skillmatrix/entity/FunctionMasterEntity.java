@@ -20,7 +20,8 @@ public class FunctionMasterEntity extends BaseEntity {
     @Column(name = "function_name")
     private String functionName;
 
-    @OneToMany(mappedBy = "functionMasterEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "functionMasterEntity",
+        fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<ProductMasterEntity> productMasterEntity;
 }

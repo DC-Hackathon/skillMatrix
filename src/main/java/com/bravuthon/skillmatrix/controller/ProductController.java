@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/pub/product")
 public class ProductController {
@@ -25,5 +27,10 @@ public class ProductController {
     @GetMapping("/getAllProduct")
     public ResponseEntity<?> getAllProduct() {
         return productInf.getAllProduct();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable("id") UUID id){
+        return productInf.updateProduct(id);
     }
 }

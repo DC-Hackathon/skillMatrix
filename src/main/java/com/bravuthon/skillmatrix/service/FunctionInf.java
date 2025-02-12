@@ -12,4 +12,6 @@ public interface FunctionInf {
     ResponseEntity<List<FunctionMasterDto>> getAllFunctions();
 
     ResponseEntity<?> createFunction(List<String> functions);
+
+    ResponseEntity<?> delete(UUID fId);
 }

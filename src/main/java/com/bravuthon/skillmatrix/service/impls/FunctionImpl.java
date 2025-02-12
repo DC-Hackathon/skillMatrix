@@ -56,4 +56,10 @@ public class FunctionImpl implements FunctionInf {
         });
         return ResponseEntity.ok("function saved in db");
     }
+
+    @Override
+    public ResponseEntity<?> delete(UUID fId) {
+        functionRepo.deleteById(fId);
+        return ResponseEntity.noContent().build();
+    }
 }
