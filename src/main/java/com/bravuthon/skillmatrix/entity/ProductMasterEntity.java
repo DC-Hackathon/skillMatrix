@@ -11,14 +11,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "ProductMaster")
+@Table(name = "product_master")
 public class ProductMasterEntity extends BaseEntity {
 
     private String productName;
 
     private String provider;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "prod_id", nullable = false)
     private FunctionMasterEntity functionMasterEntity;
 

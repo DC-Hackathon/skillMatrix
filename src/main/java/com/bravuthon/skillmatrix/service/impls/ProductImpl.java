@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductImpl implements ProductInf {
@@ -47,6 +48,14 @@ public class ProductImpl implements ProductInf {
         if(productRepoAll.isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return null;
+        return ResponseEntity.ok(productRepoAll);
+    }
+
+    @Override
+    public ResponseEntity<?> updateProduct(UUID id) {
+        ProductMasterEntity byId = productRepo.getById(id);
+        byId.setProductName(byId.getProductName()+"shdkadka");
+        productRepo.save(byId);
+        return ResponseEntity.ok("Product updated");
     }
 }

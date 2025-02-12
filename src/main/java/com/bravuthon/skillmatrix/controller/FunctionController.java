@@ -35,4 +35,9 @@ public class FunctionController {
     public ResponseEntity<?> addFunctions(@RequestBody List<String> functions) {
         return functionInf.createFunction(functions);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteFunction(@PathVariable String id) {
+        return functionInf.delete(UUID.fromString(id));
+    }
 }
